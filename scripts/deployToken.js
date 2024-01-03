@@ -1,4 +1,4 @@
-const { ethers, network } = require("hardhat");
+const { ethers, upgrades } = require("hardhat");
 const { parseEther } = ethers.utils;
 
 // contract DeployParamToken is Script {
@@ -34,29 +34,38 @@ async function main() {
   console.log("address = ", deployer.address);
   const TokenContract = await ethers.getContractFactory("ParamToken");
   //   console.log("TOken contract = ", TokenContract);
-  tokenContract = await TokenContract.deploy();
-  console.log("befopre deploy");
+  console.log("Deploying TokenContract...");
 
-  await tokenContract.deployed();
-  accounts = await ethers.getSigners(); // could also do with getNamedAccounts
-  deployer = accounts[0];
-  console.log("address = ", deployer.address);
+  tokenContract = await upgrades.deployProxy(TokenContract);
+
+  // await tokenContract.deployed();
+
   console.log(
     `Token Contract deployed at: ${tokenContract.address} on ${network.name} network`
   );
+  console.log(tokenContract.address, " tokenContract(proxy) address");
+  console.log(
+    await upgrades.erc1967.getImplementationAddress(tokenContract.address),
+    " getImplementationAddress"
+  );
+  console.log(
+    await upgrades.erc1967.getAdminAddress(tokenContract.address),
+    " getAdminAddress"
+  );
+
   const INITIAL_SUPPLY = parseEther("10000");
   const RECIPIENT_ONE = "0xb98ee84a0dcecf67399d0bca3c28a105ea0268e5";
   const RECIPIENT_TWO = "0xfb1a8b02b62aa93326dd2ff8916a703e653990db";
-  const tx = await tokenContract.mint(deployer.address, INITIAL_SUPPLY);
-  await tx.wait();
+  // const tx = await tokenContract.mint(deployer.address, INITIAL_SUPPLY);
+  // await tx.wait();
 
-  await tokenContract.mint(RECIPIENT_ONE, INITIAL_SUPPLY);
+  // await tokenContract.mint(RECIPIENT_ONE, INITIAL_SUPPLY);
 
-  await tokenContract.mint(RECIPIENT_TWO, INITIAL_SUPPLY);
-  console.log(
-    "token balance of rec 2 = ",
-    await tokenContract.balanceOf(RECIPIENT_TWO)
-  );
+  // await tokenContract.mint(RECIPIENT_TWO, INITIAL_SUPPLY);
+  // console.log(
+  //   "token balance of rec 2 = ",
+  //   await tokenContract.balanceOf(RECIPIENT_TWO)
+  // );
 }
 
 main().catch((error) => {
