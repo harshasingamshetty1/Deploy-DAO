@@ -33,6 +33,13 @@ module.exports = {
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       saveDeployments: true,
     },
+    mumbai: {
+      url: "https://rpc.ankr.com/polygon_mumbai",
+      chainId: 80001,
+      gasPrice: 20000000000,
+      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+      saveDeployments: true,
+    },
     mainnet: {
       url: "https://bsc-dataseed.binance.org/",
       chainId: 56,

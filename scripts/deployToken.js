@@ -47,7 +47,8 @@ async function main() {
   const INITIAL_SUPPLY = parseEther("10000");
   const RECIPIENT_ONE = "0xb98ee84a0dcecf67399d0bca3c28a105ea0268e5";
   const RECIPIENT_TWO = "0xfb1a8b02b62aa93326dd2ff8916a703e653990db";
-  await tokenContract.mint(deployer.address, INITIAL_SUPPLY);
+  const tx = await tokenContract.mint(deployer.address, INITIAL_SUPPLY);
+  await tx.wait();
 
   await tokenContract.mint(RECIPIENT_ONE, INITIAL_SUPPLY);
 

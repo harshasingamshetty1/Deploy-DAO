@@ -1,0 +1,2 @@
+Mumbai testnet
+Token=0x38A52e205BfDa1cd58ee260320F7276d9A8Dc1fa
