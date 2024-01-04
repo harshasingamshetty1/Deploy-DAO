@@ -37,8 +37,7 @@ async function main() {
   console.log("Deploying TokenContract...");
 
   tokenContract = await upgrades.deployProxy(TokenContract);
-
-  // await tokenContract.deployed();
+  await tokenContract.deployed();
 
   console.log(
     `Token Contract deployed at: ${tokenContract.address} on ${network.name} network`

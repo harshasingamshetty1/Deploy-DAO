@@ -1,3 +1,10 @@
 Mumbai testnet
-Token=0x38A52e205BfDa1cd58ee260320F7276d9A8Dc1fa
+
+Token Contract deployed at: 0x0f8921DDD5C81284a9E34290c981AD0380C80557 on mumbai network
+0x0f8921DDD5C81284a9E34290c981AD0380C80557  tokenContract(proxy) address
+0x5A1413c9D25521889aB92BdB50F15F84498a0400  getImplementationAddress
+0xEd75B267400a2a343d5a3E7e48ca65C74717A148  getAdminAddress
+
+
+
 Timelock=0x994eAf1b69A2345ccfCaBa5970f29F30cAd125fd

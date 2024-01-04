@@ -1,4 +1,3 @@
-require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-etherscan");
 require("@openzeppelin/hardhat-upgrades");
 require("hardhat-deploy");
@@ -6,13 +5,14 @@ require("solidity-coverage");
 require("hardhat-gas-reporter");
 require("hardhat-contract-sizer");
 require("dotenv").config();
-
+require("@nomicfoundation/hardhat-toolbox");
+require("@nomiclabs/hardhat-ethers");
 const MAINNET_RPC_URL_BSC = process.env.MAINNET_RPC_URL_BSC;
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x";
 // optional
 const BSCSCAN_API_KEY = process.env.BSCSCAN_API_KEY || "Your BSCscan API key";
 const REPORT_GAS = process.env.REPORT_GAS || false;
-
+const POLYGON_SCAN_API = process.env.POLYGON_SCAN_API;
 module.exports = {
   defaultNetwork: "hardhat",
   networks: {
@@ -54,9 +54,12 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: {
-      testnet: BSCSCAN_API_KEY,
-    },
+    apiKey: POLYGON_SCAN_API,
+  },
+  sourcify: {
+    // Disabled by default
+    // Doesn't need an API key
+    enabled: true,
   },
 
   gasReporter: {
